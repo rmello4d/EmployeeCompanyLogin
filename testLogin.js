@@ -1,0 +1,1 @@
+ds.User.all()// REMOVES all//ds.User.remove();//this should return true//directory.loginByPassword('demo@wakanda.io', '123')//this should return false//directory.loginByPassword('jerry@wakanda.io', '123')// This should send you an error, email invalid/*var jerry = new ds.User({	email: "jerry", 	password: "123"});jerry.save();*/

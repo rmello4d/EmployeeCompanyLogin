@@ -1,0 +1,425 @@
+{
+	"toJSON": true,
+	"extraProperties": {
+		"version": "2",
+		"classes": {
+			"Country": {
+				"panelColor": "#548DD4",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 28,
+						"Y": 45
+					}
+				}
+			},
+			"User": {
+				"panelColor": "#D7E3BC",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 322,
+						"Y": 389
+					}
+				}
+			},
+			"Company": {
+				"panelColor": "#BFBFBF",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 313,
+						"Y": 45
+					}
+				}
+			},
+			"Employee": {
+				"panelColor": "#CCC1D9",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 647,
+						"Y": 52
+					}
+				}
+			}
+		},
+		"model": {
+			"scriptMode": "manual",
+			"workspaceLeft": 0,
+			"workspaceTop": 168,
+			"relationCurve": {
+				"run": true,
+				"mode": 1
+			},
+			"lastScriptLocation": {
+				"Employee": {
+					"computed": "Employee/Employee-events.js",
+					"events": "Employee/Employee-events.js"
+				},
+				"User": {
+					"method": "User/User-methods.js",
+					"computed": "User/User-events.js",
+					"events": "User/User-events.js"
+				}
+			}
+		}
+	},
+	"dataClasses": [
+		{
+			"name": "Company",
+			"className": "Company",
+			"collectionName": "Companies",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"primKey": true
+				},
+				{
+					"name": "name",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "country",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Country",
+					"path": "Country"
+				},
+				{
+					"name": "countryName",
+					"kind": "alias",
+					"scope": "public",
+					"type": "string",
+					"path": "country.name"
+				},
+				{
+					"name": "employees",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "Employees",
+					"reversePath": true,
+					"path": "company"
+				},
+				{
+					"name": "manager",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Employee",
+					"path": "Employee"
+				},
+				{
+					"name": "managerName",
+					"kind": "alias",
+					"scope": "public",
+					"type": "string",
+					"path": "manager.fullName"
+				}
+			]
+		},
+		{
+			"name": "Country",
+			"className": "Country",
+			"collectionName": "Countries",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"primKey": true
+				},
+				{
+					"name": "name",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "code",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "companies",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "Companies",
+					"reversePath": true,
+					"path": "country"
+				}
+			]
+		},
+		{
+			"name": "Employee",
+			"className": "Employee",
+			"collectionName": "Employees",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"primKey": true
+				},
+				{
+					"name": "firstName",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "lastName",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "fullName",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "string",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "$mainModel.Employee.fullName.onGet",
+							"userDefined": true
+						}
+					],
+					"onSet": [
+						{
+							"from": "$mainModel.Employee.fullName.onSet",
+							"userDefined": true
+						}
+					],
+					"onQuery": [
+						{
+							"from": "$mainModel.Employee.fullName.onQuery",
+							"userDefined": true
+						}
+					],
+					"onSort": [
+						{
+							"from": "$mainModel.Employee.fullName.onSort",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "birthDate",
+					"kind": "storage",
+					"scope": "public",
+					"type": "date",
+					"simpleDate": false
+				},
+				{
+					"name": "age",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "number",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "$mainModel.Employee.age.onGet",
+							"userDefined": true
+						}
+					],
+					"onSet": [
+						{
+							"from": "$mainModel.Employee.age.onSet",
+							"userDefined": true
+						}
+					],
+					"onQuery": [
+						{
+							"from": "$mainModel.Employee.age.onQuery",
+							"userDefined": true
+						}
+					],
+					"onSort": [
+						{
+							"from": "$mainModel.Employee.age.onSort",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "company",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Company",
+					"path": "Company"
+				},
+				{
+					"name": "companyName",
+					"kind": "alias",
+					"scope": "public",
+					"type": "string",
+					"path": "company.name"
+				},
+				{
+					"name": "manager",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Employee",
+					"path": "Employee"
+				},
+				{
+					"name": "staff",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "Employees",
+					"reversePath": true,
+					"path": "manager"
+				},
+				{
+					"name": "country",
+					"kind": "alias",
+					"scope": "public",
+					"type": "string",
+					"path": "company.countryName"
+				},
+				{
+					"name": "salary",
+					"kind": "storage",
+					"scope": "public",
+					"type": "number"
+				},
+				{
+					"name": "managedCompanies",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "Companies",
+					"reversePath": true,
+					"path": "manager"
+				},
+				{
+					"name": "title",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "gender",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "photo",
+					"kind": "storage",
+					"scope": "public",
+					"type": "image"
+				}
+			]
+		},
+		{
+			"name": "User",
+			"className": "User",
+			"collectionName": "UserCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"primKey": true
+				},
+				{
+					"name": "email",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string",
+					"events": [
+						{
+							"kind": "validate",
+							"from": "$mainModel.User.email.events.validate",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "password",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "string",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "$mainModel.User.password.onGet",
+							"userDefined": true
+						}
+					],
+					"onSet": [
+						{
+							"from": "$mainModel.User.password.onSet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "HA1Key",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "photo",
+					"kind": "storage",
+					"scope": "public",
+					"type": "image"
+				},
+				{
+					"name": "role",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "fullName",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				}
+			],
+			"methods": [
+				{
+					"name": "addUser",
+					"applyTo": "dataClass",
+					"scope": "public",
+					"from": "$mainModel.User.methods.addUser",
+					"userDefined": true
+				},
+				{
+					"name": "validatePassword",
+					"applyTo": "entity",
+					"scope": "publicOnServer",
+					"from": "$mainModel.User.entityMethods.validatePassword",
+					"userDefined": true
+				}
+			]
+		}
+	]
+}
