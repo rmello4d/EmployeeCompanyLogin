@@ -1,0 +1,10 @@
+[
+  {
+    "taskName": "start",
+    "title": "Running Wakanda Server",
+    "type": "wakanda",
+    "options": {
+      "command": "startServer"
+    }
+  }
+]
